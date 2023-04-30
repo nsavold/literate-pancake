@@ -12,12 +12,15 @@ def check_events(ai_settings, screen, ship, bullets):
             check_keyup_events(event, ship)
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
-    if event.key == pg.K_RIGHT:
+    keys = pg.key.get_pressed()
+    if keys[pg.K_RIGHT]:
         ship.moving_right = True
-    elif event.key == pg.K_LEFT:
+    elif keys[pg.K_LEFT]:
         ship.moving_left = True
-    elif event.key == pg.K_SPACE: #create boolet
+    elif keys[pg.K_SPACE]: #create boolet
         fire_bullet(ai_settings, screen, ship, bullets)
+    elif keys[pg.K_LSHIFT] and keys[pg.K_q]:
+        sys.exit()
         
 
 def check_keyup_events(event, ship): #no bullet here
