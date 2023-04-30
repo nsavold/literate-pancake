@@ -5,8 +5,8 @@ class Settings():
     def __init__(self):
         #initialize settings
         ##Screen:
-        self.screen_width = 1600    
-        self.screen_height = 900
+        self.screen_width = 1280    
+        self.screen_height = 720
         self.bg_color = (0,0,0)
         self.bg = pg.image.load('literate-pancake/Alien_Invasion/image/stars.png')
         self.bg = pg.transform.scale(self.bg, (self.screen_width, self.screen_height))
