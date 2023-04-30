@@ -11,7 +11,7 @@ class Ship():
         self.moving_left = False
         
         #load ship, get a rectangle size
-        self.image = pg.image.load('alien_invasion_gam/image/ship.bmp')
+        self.image = pg.image.load('literate-pancake/Alien_Invasion/image/ship.bmp')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         
