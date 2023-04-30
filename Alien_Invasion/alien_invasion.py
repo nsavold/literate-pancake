@@ -2,6 +2,7 @@ import pygame as pg
 from settings import Settings
 from ship import Ship
 import game_functions as gf
+from pygame.sprite import Group #group is a class?
 
 def run_game():
     #start game and create a screen for it
@@ -13,13 +14,19 @@ def run_game():
     
     #make ship
     ship = Ship(ai_settings,screen)
-    #set options:
+    #make a group fro bullets
+    bullets = Group()
+
     
     #start the "main" loop:
     while True:#while running
-        gf.check_events(ship)
+        gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()#after check event
-        gf.update_screen(ai_settings, screen, ship) 
+        bullets.update()
+        gf.update_bullets(bullets)
+        gf.update_screen(ai_settings, screen, ship, bullets)
+       
+        
         
         
 run_game()

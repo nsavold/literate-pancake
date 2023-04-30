@@ -10,4 +10,11 @@ class Settings():
         #we can modify these things here 
         
         #Ship properties
-        self.ship_speed_factor = 5.5
+        self.ship_speed_factor = 2.5
+        
+        #bullet properties
+        self.bullet_speed_factor = 1
+        self.bullet_height = 15
+        self.bullet_width = 5
+        self.bullet_color= (255,0,0)
+        self.bullets_allowed = 5

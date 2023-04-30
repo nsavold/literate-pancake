@@ -13,7 +13,7 @@ class Ship():
         #load ship, get a rectangle size
         self.image = pg.image.load('literate-pancake/Alien_Invasion/image/ship.bmp')
         self.rect = self.image.get_rect()
-        self.screen_rect = screen.get_rect()
+        self.screen_rect = screen.get_rect() # our screen has a rectangle for collision
         
         #start the ship at the bottom center
         #centerx is the  coord of the center, centery is is y
@@ -23,9 +23,9 @@ class Ship():
             
     def update(self):
         #position updates basd on movement flags
-        if self.moving_left:
+        if self.moving_left and self.rect.left > 0: #rectleft not at edge
             self.center -= self.ai_settings.ship_speed_factor
-        if self.moving_right:
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.ai_settings.ship_speed_factor
         #update rect
         self.rect.centerx = self.center
