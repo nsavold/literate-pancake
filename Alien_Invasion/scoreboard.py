@@ -12,11 +12,12 @@ class Scoreboard():
         #font color etc
         self.text_color = (255,0,0)
         self.font = pygame.font.SysFont(None, 48)
-        self.prep_score()
+        #self.prep_score()
+        #self.prep_lives()
         
     def prep_score(self):
         #renders score as an image
-        score_str = str(self.stats.score)
+        score_str ="score:" + str(self.stats.score)
         self.stats_img = self.font.render(score_str, True, self.text_color, self.ai_settings.bg_color)
         #display the score
         self.score_rect = self.stats_img.get_rect()
@@ -26,3 +27,17 @@ class Scoreboard():
     def show_score(self):
         #draw to screen
         self.screen.blit(self.stats_img, self.score_rect)
+        
+    def prep_lives(self):
+        #renders lives left as an image
+        life_str = "lives: " + str(self.stats.ships_left)
+        self.life_img = self.font.render(life_str, True, self.text_color, self.ai_settings.bg_color)
+        self.life_rect = self.life_img.get_rect()
+        self.life_rect.left = 20
+        self.life_rect.top = 20
+        
+    def show_lives(self):
+        self.screen.blit(self.life_img, self.life_rect)
+        
+#can probably learn more about classes and make a subclass for these.
+#there's two types of scoreboards: lives, and points

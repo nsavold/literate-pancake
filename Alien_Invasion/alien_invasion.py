@@ -21,23 +21,26 @@ def run_game():
     #make alien group and fleet
     aliens = Group()                            #passed to most functions
     gf.create_fleet(ai_settings, screen, ship, aliens)
-    #make stats and scoreboard
+    #make stats object, and scoreboard/lives counter
     stats = Game_stats(ai_settings)             #passed to most functions
     sb = Scoreboard(ai_settings, screen, stats)
+    sb.prep_score()
+    lc = Scoreboard(ai_settings, screen, stats)
+    lc.prep_lives()
     #make play button
     p_button = Button(ai_settings, screen, "Click to Play")
     
     
     #start the "main" loop:
     while True:#while running
-        gf.check_events(ai_settings, screen, stats, p_button, ship, aliens, bullets)
+        gf.check_events(ai_settings, screen, stats, lc, sb, p_button, ship, aliens, bullets)
         if stats.game_active:
             ship.update()#after check event
             bullets.update()
-            gf.update_bullets(ai_settings, screen, ship, bullets, aliens)
-            gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets) 
-        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, p_button)
-        #right now we freeze when run out of lives and stop updating the screen
+            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
+            gf.update_aliens(ai_settings, stats, screen, lc, ship, aliens, bullets) 
+        gf.update_screen(ai_settings, screen, stats, sb, lc, ship, aliens, bullets, p_button)
+        
         
         
         
