@@ -23,7 +23,9 @@ class Ship():
         self.rect.bottom = self.screen_rect.bottom
         self.center = float(self.rect.centerx)
 
-        
+    def center_ship(self):
+        """Center the ship on the screen."""
+        self.center = self.screen_rect.centerx     
             
     def update(self):
         #position updates basd on movement flags
