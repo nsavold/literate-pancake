@@ -4,22 +4,34 @@ from bullet import Bullet
 from alien import Alien
 from time import sleep
 
-def check_events(ai_settings, screen, stats, p_button, ship, bullets):
+def check_events(ai_settings, screen, stats, p_button, ship, aliens, bullets): #not that we're not passing mouse position
     for event in pg.event.get():
         if event.type == pg.QUIT:
             sys.exit()#exit unless other keys
         elif event.type == pg.MOUSEBUTTONDOWN:
             m_x, m_y = pg.mouse.get_pos()
-            check_play_button(stats, p_button, m_x, m_y)
+            check_play_button(ai_settings, screen, stats, p_button, ship, aliens, bullets, m_x, m_y)
         elif event.type == pg.KEYDOWN:#keys in other method
             check_keydown_events(event, ai_settings, screen, ship, bullets)
         elif event.type == pg.KEYUP:            
             check_keyup_events(event, ship)
 
-def check_play_button(stats, p_button, m_x, m_y):
+def check_play_button(ai_settings, screen, stats, p_button, ship, aliens, bullets, m_x, m_y):
     #new game when play clicked
-    if p_button.rect.collidepoint(m_x, m_y):
+    button_clicked = p_button.rect.collidepoint(m_x, m_y)
+    if button_clicked and not stats.game_active: #if we click the button when the game isnt running
+            #reset the game stats and settings
             stats.game_active = True
+            stats.reset_stats()
+            ai_settings.initialize_dynamic_settings()
+            #delete all bullets and aliens
+            bullets.empty()
+            aliens.empty()
+            #new fleet, center ship
+            create_fleet(ai_settings, screen, ship, aliens)
+            ship.center_ship()
+            #hide mouse
+            pg.mouse.set_visible(False)
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
     keys = pg.key.get_pressed()
@@ -81,7 +93,7 @@ def create_fleet(ai_settings, screen, ship, aliens): #uses the  functions above 
         i = 0
         j += ai_settings.bg.get_height()'''
 
-def update_screen(ai_settings, screen, stats, ship, aliens, bullets, p_button):#call sprite updates
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, p_button):#call sprite updates
     #redraw and update screen, go to new screen       
     screen.blit(ai_settings.bg.convert(), (0, 0))      #this does it just once      
     ship.blitme()
@@ -89,6 +101,7 @@ def update_screen(ai_settings, screen, stats, ship, aliens, bullets, p_button):#
     #redraw bullets
     for bullet in bullets.sprites():
         bullet.draw_bullet()
+    sb.show_score()
     #if the game is inactive draw button
     if not stats.game_active:
         p_button.draw_button()
@@ -110,8 +123,10 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):#what happens if
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()      #make new stuff
         sleep(0.8) #pause for player recognition
-    else:
-        stats.game_active = False
+    else: # if you run out of lives...
+        pg.mouse.set_visible(True)  # make the mouse reappear when out of lives
+        stats.game_active = False # end the game
+       
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):#are the aliens at the bottom of screen?
     #if an alien hits the bottom, lose a life
@@ -134,7 +149,10 @@ def change_fleet_direction(ai_settings, aliens):#flip the direction pointer for 
     #drop fleet, switch direciton of all aliens
     for alien in aliens.sprites():
         alien.rect.y += ai_settings.fleet_drop_speed #drop them all
+        #pg.time.wait(ai_settings.alien_drop_pause) ###this makes the ships pause ..but the whole game too.
     ai_settings.fleet_direction *= -1 #flip the direction of the ships
+    ###https://stackoverflow.com/questions/60876673/how-to-execute-event-repeatedly-in-python/60880122#60880122
+    ###we'd want to pause the ships here momentarily. but how?????
 
 def check_fleet_edges(ai_settings, aliens):#check if the aliens are at the left/right edge then flip
     #if the alien hits the edge, respond
@@ -144,8 +162,10 @@ def check_fleet_edges(ai_settings, aliens):#check if the aliens are at the left/
             break #check em once, then stop, we come back  
 
 def bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):#pew pew pow
-    collisions = pg.sprite.groupcollide(bullets, aliens, True, True) 
-    if len(aliens) == 0:#if we empty fleet
+    collisions = pg.sprite.groupcollide(bullets, aliens, True, True) #false, true for easier testing
+    if len(aliens) == 0:#if we empty fleet by destroying them
         bullets.empty() #remove all bullets
-        create_fleet(ai_settings, screen, ship, aliens)
+        ai_settings.increase_speed() #speed the game up
+        create_fleet(ai_settings, screen, ship, aliens) #make a new fleet
+        
 

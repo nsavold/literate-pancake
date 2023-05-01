@@ -13,7 +13,7 @@ class Alien(Sprite):
         WHITE = (255,255,255)
 
         #load image, change size, make it transparent
-        self.image = pg.image.load('literate-pancake/Alien_Invasion/image/enemyship.png')#for great justice find a ship
+        self.image = pg.image.load('Alien_Invasion/image/enemyship.png')#for great justice find a ship
         self.image = pg.transform.scale(self.image, SHIP_SIZE)
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
