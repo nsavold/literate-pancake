@@ -18,7 +18,7 @@ class Settings():
         
         #bullet properties
         self.bullet_height = 25
-        self.bullet_width = 10                #modify for testing. 10 normally
+        self.bullet_width = 10             #modify for testing. 10 normally
         self.bullet_color= (255,0,0)
         self.bullets_allowed = 4
 
@@ -29,6 +29,7 @@ class Settings():
         
         #speedup settings
         self.speedup_scale = 1.1
+        self.score_scale = 1.5
         #initialize changing settings
         self.initialize_dynamic_settings()
         
@@ -47,5 +48,7 @@ class Settings():
         self.bullet_speed_factor *= self.speedup_scale
         self.alien_speed_factor *= self.speedup_scale
         self.alien_drop_pause /= self.speedup_scale
-        self.alien_points = int(self.alien_points * self.speedup_scale)
+        self.alien_points = int(self.alien_points * self.score_scale)
+        print(self.alien_points)
+        
     #we call this when we kill the whole fleet

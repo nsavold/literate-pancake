@@ -17,8 +17,9 @@ class Scoreboard():
         
     def prep_score(self):
         #renders score as an image
-        score_str ="score:" + str(self.stats.score)
-        self.stats_img = self.font.render(score_str, True, self.text_color, self.ai_settings.bg_color)
+        score_str = f"{self.stats.score:,}"
+        score_msg = "score: " + score_str
+        self.stats_img = self.font.render(score_msg, True, self.text_color, self.ai_settings.bg_color)
         #display the score
         self.score_rect = self.stats_img.get_rect()
         self.score_rect.right = self.screen_rect.right - 20

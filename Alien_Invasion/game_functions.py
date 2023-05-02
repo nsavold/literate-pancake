@@ -181,9 +181,10 @@ def check_fleet_edges(ai_settings, aliens):#check if the aliens are at the left/
 
 def bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):#pew pew pow
     collisions = pg.sprite.groupcollide(bullets, aliens, True, True) #false, true for easier testing
-    if collisions:
-        stats.score += ai_settings.alien_points
-        sb.prep_score()
+    if collisions: #collisions is a dictionary btw. now we will refactor 
+        for aliens in collisions.values():
+            stats.score += ai_settings.alien_points * len(aliens)
+            sb.prep_score()
     if len(aliens) == 0:#if we empty fleet by destroying them
         bullets.empty() #remove all bullets
         ai_settings.increase_speed() #speed the game up
