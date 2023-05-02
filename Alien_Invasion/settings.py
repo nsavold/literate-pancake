@@ -8,7 +8,7 @@ class Settings():
         self.screen_width = 1280    
         self.screen_height = 720
         self.bg_color = (0,0,0)
-        self.bg = pg.image.load('Alien_Invasion/image/stars.png')
+        self.bg = pg.image.load('Alien_Invasion/image/stars.png')#literate-pancake needs to be the acitve directory in terminal
         self.bg = pg.transform.scale(self.bg, (self.screen_width, self.screen_height))
         #we can modify these things here 
         
@@ -17,12 +17,12 @@ class Settings():
         
         #bullet properties
         self.bullet_height = 25
-        self.bullet_width = 1000                #modify for testing. 15 normally
+        self.bullet_width = 15                #modify for testing. 15 normally
         self.bullet_color= (255,0,0)
         self.bullets_allowed = 4
 
         #alien settings
-        self.fleet_drop_speed = 100              #####modify for testing. 10 normally
+        self.fleet_drop_speed = 10             #####modify for testing. 10 normally
         #fleet direction: negative left, positive right
         
         
@@ -35,7 +35,7 @@ class Settings():
     def initialize_dynamic_settings(self): # most of these settings we moved into the dynamic category
         self.ship_speed_factor = 1.5
         self.bullet_speed_factor = 2.5
-        self.alien_speed_factor = 10.5         ###modify for testing. 1.5 normally
+        self.alien_speed_factor = 1.5         ###modify for testing. 1.5 normally
         self.alien_drop_pause = 5 #unused right now. how can we have the aliens stop for a biit when they hit the edge
         self.fleet_direction = 1 #could do left right but...we'll multiple by this to flip direction
        #points for aliens
