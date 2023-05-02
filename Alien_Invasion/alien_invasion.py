@@ -29,6 +29,7 @@ def run_game():
     lc.prep_lives()
     #make play button
     p_button = Button(ai_settings, screen, "Click to Play")
+    #TODO: refactor for a new Group() of HUD elements?
     
     
     #start the "main" loop:
