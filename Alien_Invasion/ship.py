@@ -12,7 +12,9 @@ class Ship():
         WHITE = (255,255,255)
         
         #load ship, get a rectangle size, make bg transparent
-        self.image = pg.image.load('Alien_Invasion/image/ship.bmp')
+        #change which line is uncommented to change enemy ship
+        self.image = pg.image.load('Alien_Invasion/image/thatsnoship.png') #waifu
+        #self.image = pg.image.load('Alien_Invasion/image/ship.bmp') #no waifu
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect() # our screen has a rectangle for collision
