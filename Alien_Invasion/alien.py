@@ -9,14 +9,13 @@ class Alien(Sprite):
         super().__init__()
         self.screen = screen
         self.ai_settings = ai_settings
-        SHIP_SIZE = (50, 40)
         WHITE = (255,255,255)
 
         #load image, change size, make it transparent
         #comment out all but one line of the enemy ships for dinnfer ones
-        self.image = pg.image.load('Alien_Invasion/image/thatsnoenemyship.png')#waifu
-        #self.image = pg.image.load('Alien_Invasion/image/enemyship.png')#generic
-        self.image = pg.transform.scale(self.image, SHIP_SIZE)
+        #self.image = pg.image.load('Alien_Invasion/image/thatsnoenemyship.png')#waifu
+        self.image = pg.image.load('Alien_Invasion/image/enemyship.png')#generic
+        self.image = pg.transform.scale(self.image, ai_settings.alien_ship_size)
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
 
