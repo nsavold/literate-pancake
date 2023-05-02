@@ -35,7 +35,7 @@ def check_play_button(ai_settings, screen, stats, p_button, ship, lc, sb, aliens
             #hide mouse
             pg.mouse.set_visible(False)
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+'''def check_keydown_events(event, ai_settings, screen, ship, bullets):
     keys = pg.key.get_pressed()
     if keys[pg.K_RIGHT]:
         ship.moving_right = True
@@ -44,7 +44,21 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     elif keys[pg.K_SPACE]: #create boolet
         fire_bullet(ai_settings, screen, ship, bullets)
     elif keys[pg.K_LSHIFT] and keys[pg.K_q]:
+        sys.exit()     '''
+
+def check_keydown_events(event, ai_settings, screen, ship, bullets):
+    keys = pg.key.get_pressed()
+    if event.key == pg.K_RIGHT:
+        ship.moving_right = True
+    elif event.key == pg.K_LEFT:
+        ship.moving_left = True
+    elif event.key == pg.K_SPACE: #create boolet
+        fire_bullet(ai_settings, screen, ship, bullets)
+    elif event.key == pg.K_LSHIFT and keys[pg.K_q]:
         sys.exit()     
+#rerefactored: hanling each key as an event lets movement+shooting work. this is how the book had it
+#handling every key like the keycombo didn't allow that. this allows the quit message
+
 
 def check_keyup_events(event, ship): #no bullet here
     if event.key == pg.K_RIGHT:
@@ -58,13 +72,13 @@ def fire_bullet(ai_settings, screen, ship, bullets):#fires bullet if allowed
         bullets.add(new_bullet)
                         
 def get_num_of_aliens_x(ai_settings, alien_width): #how many aliens in a row
-    available_space_x = ai_settings.screen_width - 2*alien_width #our screen width, minus a gap of 2 aliens
+    available_space_x = ai_settings.screen_width - 3*alien_width #our screen width, minus a gap of 2 aliens
     num_aliens_x = int(available_space_x/(2*alien_width)) #how many spaces for alien + space between
     return num_aliens_x
 
 def get_num_of_rows(ai_settings, ship_height, alien_height):# how many alien rows we allow to spawn
     ##rows that can fit with buffer between player/fleet
-    availaible_space_y = (ai_settings.screen_height- (7*alien_height)-ship_height)#gap = 7 rows + player
+    availaible_space_y = (ai_settings.screen_height- (10*alien_height)-ship_height)#gap = 10 rows + player
     number_rows = int(availaible_space_y/(2*alien_height))#rows = space available/alien+empty space
     return number_rows
 

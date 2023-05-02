@@ -13,8 +13,9 @@ class Ship():
         
         #load ship, get a rectangle size, make bg transparent
         #change which line is uncommented to change enemy ship
-        self.image = pg.image.load('Alien_Invasion/image/thatsnoship.png') #waifu
-        #self.image = pg.image.load('Alien_Invasion/image/ship.bmp') #no waifu
+        #self.image = pg.image.load('Alien_Invasion/image/thatsnoship.png') #waifu
+        self.image = pg.image.load('Alien_Invasion/image/ship.bmp') #no waifu
+        self.image = pg.transform.scale(self.image, ai_settings.player_ship_size)
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect() # our screen has a rectangle for collision

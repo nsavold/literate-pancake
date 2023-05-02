@@ -14,16 +14,17 @@ class Settings():
         
         #Ship properties
         self.ship_limit = 3
+        self.player_ship_size = (50,60)  #60, 72 is file's original size
         
         #bullet properties
         self.bullet_height = 25
-        self.bullet_width = 15                #modify for testing. 15 normally
+        self.bullet_width = 10                #modify for testing. 10 normally
         self.bullet_color= (255,0,0)
         self.bullets_allowed = 4
 
         #alien settings
-        self.fleet_drop_speed = 10             #####modify for testing. 10 normally
-        #fleet direction: negative left, positive right
+        self.fleet_drop_speed = 8            #####modify for testing. 8 normally
+        self.alien_ship_size = (40, 32)
         
         
         #speedup settings
@@ -35,7 +36,7 @@ class Settings():
     def initialize_dynamic_settings(self): # most of these settings we moved into the dynamic category
         self.ship_speed_factor = 1.5
         self.bullet_speed_factor = 2.5
-        self.alien_speed_factor = 1.5         ###modify for testing. 1.5 normally
+        self.alien_speed_factor = .75         ###modify for testing. .75 normally
         self.alien_drop_pause = 5 #unused right now. how can we have the aliens stop for a biit when they hit the edge
         self.fleet_direction = 1 #could do left right but...we'll multiple by this to flip direction
        #points for aliens
