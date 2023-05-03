@@ -99,16 +99,6 @@ def create_fleet(ai_settings, screen, ship, aliens): #uses the  functions above 
         for alien_number in range (num_aliens_x):#first row
             create_alien(ai_settings, screen, aliens, alien_number, row_number) #make alien
 
-'''def draw_bg(ai_settings, screen):#we tried, but realized it was esier to just make a big backgorund with stars and scale it
-    i, j = 0,0
-    bg_space_x, bg_space_y = (int(ai_settings.screen_width/ai_settings.bg.get_width()) +2), (int(ai_settings.screen_height/ai_settings.bg.get_height()) +2)
-    for x_space in range(bg_space_x):
-        for y_space in range(bg_space_y):
-            screen.blit(ai_settings.bg.convert(), (i, j))#set the background  while running from settings class
-            i += ai_settings.bg.get_width() 
-        i = 0
-        j += ai_settings.bg.get_height()'''
-
 def update_screen(ai_settings, screen, stats, sb, lc, ship, aliens, bullets, p_button):#call sprite updates
     #redraw and update screen, go to new screen       
     screen.blit(ai_settings.bg.convert(), (0, 0))      #this does it just once      
@@ -191,3 +181,12 @@ def bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullet
         create_fleet(ai_settings, screen, ship, aliens) #make a new fleet
         
 
+'''def draw_bg(ai_settings, screen):#we tried, but realized it was esier to just make a big backgorund with stars and scale it
+    i, j = 0,0
+    bg_space_x, bg_space_y = (int(ai_settings.screen_width/ai_settings.bg.get_width()) +2), (int(ai_settings.screen_height/ai_settings.bg.get_height()) +2)
+    for x_space in range(bg_space_x):
+        for y_space in range(bg_space_y):
+            screen.blit(ai_settings.bg.convert(), (i, j))#set the background  while running from settings class
+            i += ai_settings.bg.get_width() 
+        i = 0
+        j += ai_settings.bg.get_height()'''
