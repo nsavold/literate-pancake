@@ -8,7 +8,7 @@ class Settings():
         self.screen_width = 1280    
         self.screen_height = 720
         self.bg_color = (0,0,0)
-        self.bg = pg.image.load('Alien_Invasion/image/stars.png')#literate-pancake needs to be the acitve directory in terminal
+        self.bg = pg.image.load('Alien_Invasion/image/stars.gif')#literate-pancake needs to be the acitve directory in terminal
         self.bg = pg.transform.scale(self.bg, (self.screen_width, self.screen_height))
         #we can modify these things here 
         
