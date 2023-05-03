@@ -14,7 +14,7 @@ class Ship():
         #load ship, get a rectangle size, make bg transparent
         #change which line is uncommented to change enemy ship
      
-        self.image = pg.image.load('Alien_Invasion/image/ship.bmp') 
+        self.image = pg.image.load('Alien_Invasion/image/ship2.bmp') 
         self.image = pg.transform.scale(self.image, ai_settings.player_ship_size)
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
